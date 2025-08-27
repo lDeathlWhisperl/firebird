@@ -319,8 +319,11 @@ bool UnlistFunctionScan::nextBuffer(thread_db* tdbb) const
 				}
 
 				if (size > 0)
-					impure->m_resultStr->append(std::string(valueView),
-						static_cast<string::size_type>(size));
+				{
+				    std::string str(valueView);
+					impure->m_resultStr->append(str.c_str(), 
+					    static_cast<string::size_type>(size));
+			    }
 
 				valueView.remove_prefix(size + separatorView.length());
 
